@@ -1,0 +1,17 @@
+{
+	"scss": {
+		"src": "scss/**/*.scss",
+		"dest": "styles/"
+	},
+	"js": {
+		"src": [
+			"scripts/main.js"
+		],
+		"dest": "scripts/"
+	},
+	"images": "images/**/*.{gif,jpg,png,svg}",
+	"html": [
+    "**/*.html",
+    "!node_modules/**/*.*"
+  ]
+}
