@@ -4,13 +4,14 @@ const EXERCISE_URL = 'https://raw.githubusercontent.com/Adalab/recipes-data/mast
 let RECIPE;
 
 /**
- * Como yo uso arrow functions, para entender la lógica de ese código recomiendo
- * que sea lido de bajo para arriba.
+ * Como uso arrow functions, para entender la lógica de ese código recomiendo
+ * que sea leído de bajo para arriba.
  */
 
-// ======== Deficición de las funcionalidades secundarias (derivadas de eventos)
 
-/* [ 9 ] */ const updateTotalCosts = () => {
+// ======== Definición de las funcionalidades secundarias (derivadas de eventos)
+
+/* [ 10 ] */ const updateTotalCosts = () => {
   const allPriceFields = document.querySelectorAll( '.recipe-main__value' );
   const shippingCost = RECIPE[ 'shipping-cost' ];
   let   subtotal       = 0;
@@ -22,7 +23,7 @@ let RECIPE;
   document.getElementById( 'totalButton' ).innerHTML = ( total + shippingCost ).toFixed( 2 ) + RECIPE.currency;
 };
 
-/* [ 8 ] */ const updateTotalQuantities = () => {
+/* [ 9 ] */ const updateTotalQuantities = () => {
   const allQuantityFields = document.querySelectorAll( '.recipe-main__quantityField' );
   let   total             = 0;
 
@@ -30,7 +31,7 @@ let RECIPE;
   document.getElementById( 'quantity' ).innerHTML = total;
 };
 
-/* [ 7 ] */ const determineCosts = ( ingredientId, quantity ) => {
+/* [ 8 ] */ const determineCosts = ( ingredientId, quantity ) => {
   for ( const _ingredient of RECIPE.ingredients ) {
     let costPerUnity;
 
@@ -45,18 +46,27 @@ let RECIPE;
 
 // ======== Deficición de las funcionalidades directas (eventos) ===============
 
+/* [ 7 ] */ const handleToggleAll  = action => {
+  const CHECKBOXES = document.querySelectorAll( '.recipe-main__checkbox' );
+  let isNotChecked;
+
+  action === 'deselect' ? isNotChecked = true : isNotChecked = false;
+
+  CHECKBOXES.forEach( checkbox => checkbox.checked === isNotChecked && checkbox.click() );
+};
+
 /* [ 6 ] */ const handleCheckboxClick = clickEvent => {
   const thisIngredient = clickEvent.currentTarget.parentElement;
 
   if ( clickEvent.currentTarget.checked ) {
     thisIngredient.querySelector( '.recipe-main__quantityField' ).value = 1;
-    thisIngredient.querySelector( '.recipe-main__value' ).innerHTML = determineCosts( thisIngredient.id, 1 ); // ver [ 7 ]
+    thisIngredient.querySelector( '.recipe-main__value' ).innerHTML = determineCosts( thisIngredient.id, 1 ); // ver [ 8 ]
   } else {
     thisIngredient.querySelector( '.recipe-main__quantityField' ).value = 0;
-    thisIngredient.querySelector( '.recipe-main__value' ).innerHTML = determineCosts( thisIngredient.id, 0 ); // ver [ 7 ]
+    thisIngredient.querySelector( '.recipe-main__value' ).innerHTML = determineCosts( thisIngredient.id, 0 ); // ver [ 8 ]
   }
-  updateTotalQuantities(); // ver [ 8 ]
-  updateTotalCosts();      // ver [ 9 ]
+  updateTotalQuantities(); // ver [ 9 ]
+  updateTotalCosts();      // ver [ 10 ]
 };
 
 /* [ 5 ] */ const handleQuantityInputChange = changeEvent => {
@@ -64,9 +74,7 @@ let RECIPE;
   const thisCheckBox   = thisIngredient.querySelector( '.recipe-main__checkbox' );
   const quantity       = changeEvent.currentTarget.value;
 
-  thisIngredient.querySelector( '.recipe-main__value' ).innerHTML = determineCosts( thisIngredient.id, quantity );
-
-  console.log( quantity, thisCheckBox);
+  thisIngredient.querySelector( '.recipe-main__value' ).innerHTML = determineCosts( thisIngredient.id, quantity ); // ver [ 8 ]
 
   if ( thisCheckBox.checked === false ) {
     thisCheckBox.checked = true;
@@ -74,8 +82,8 @@ let RECIPE;
     thisCheckBox.checked = false;
   }
 
-  updateTotalQuantities(); // ver [ 8 ]
-  updateTotalCosts();      // ver [ 9 ]
+  updateTotalQuantities(); // ver [ 9 ]
+  updateTotalCosts();      // ver [ 10 ]
 };
 
 // -----------------------------------------------------------------------------
@@ -85,14 +93,18 @@ let RECIPE;
 /* [ 4 ] */ const addEventListeners = () => {
   const CHECKBOXES      = document.querySelectorAll( '.recipe-main__checkbox' );
   const QUANTITY_INPUTS = document.querySelectorAll( '.recipe-main__quantityField' );
+  const SELECT_ALL = document.getElementById( 'selectAll' );
+  const DESELECT_ALL = document.getElementById( 'deselectAll' );
 
   CHECKBOXES.forEach( checkbox => {
-    checkbox.addEventListener( 'click', handleCheckboxClick );
+    checkbox.addEventListener( 'click', handleCheckboxClick ); // ver [ 6 ]
   });
 
   QUANTITY_INPUTS.forEach( input => {
-    input.addEventListener( 'input', handleQuantityInputChange );
+    input.addEventListener( 'input', handleQuantityInputChange ); // ver [ 5 ]
   });
+  SELECT_ALL.addEventListener( 'click', () => handleToggleAll( 'select' ));     // ver [ 7 ]
+  DESELECT_ALL.addEventListener( 'click', () => handleToggleAll( 'deselect' )); // ver [ 7 ]
 };
 
 // -----------------------------------------------------------------------------
@@ -135,8 +147,8 @@ let RECIPE;
 /* [ 1 ] */ const catchData = () => {
   catchRecipeNameAndDetails(); // ver [ 2 ]
   catchIngredients();          // ver [ 3 ]
-  updateTotalQuantities();     // ver [ 8 ]
-  updateTotalCosts();          // ver [ 9 ]
+  updateTotalQuantities();     // ver [ 9 ]
+  updateTotalCosts();          // ver [ 10 ]
 };
 
 // -----------------------------------------------------------------------------
@@ -145,7 +157,7 @@ let RECIPE;
 
 /* [ 0 ] */ const INITIATE = () => {
   fetch( EXERCISE_URL )
-    .then( response => response.json())
+    .then( response => response.json() )
     .then( responseJSON => {
       RECIPE = responseJSON.recipe;
       catchData(); // ver [ 1 ]
