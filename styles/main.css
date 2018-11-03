@@ -1,4 +1,4 @@
-/* http://meyerweb.com/eric/tools/css/reset/
+@import url("https://fonts.googleapis.com/css?family=Cuprum");/* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License : none (public domain)
 */a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video {
@@ -14,10 +14,246 @@ ol,ul {
   list-style: none;
 }
 
-.basic-text {
+.header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 0 40px;
+}
+
+.header__text {
+  font-size: 0.6rem;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  background-image: linear-gradient(137deg, #e6e6e6, rgba(70, 152, 70, 0.4));
+  font-family: sans-serif;
+  font-size: 16px;
+}
+
+section {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.main__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  margin: 20px auto;
+  border: 1px solid #cbcbcb;
+  width: 50vw;
+  background: #ffffff;
+}
+
+.section__recipe-header {
+  border-bottom: 1px solid #4f7ec5;
+  width: 100%;
+  padding: 50px 40px 5px;
+}
+
+.recipe-header__subtitle {
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  color: #a4a4a4;
+}
+
+.recipe-header__title {
+  margin: 3px 0 20px;
+  font-family: 'Arial', serif;
+  font-size: 2rem;
   font-weight: 700;
+  color: #151515;
+}
+
+.recipe-header__select {
+  display: inline;
+  font-size: 0.7rem;
+  color: #4f7ec5;
+  cursor: pointer;
+}
+
+.recipe-header__verticalBar {
+  margin: 0 10px;
+}
+
+.thankU {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+  font-size: 1.5rem;
   text-align: center;
+}
+
+.pleaseWait {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+  width: 15%;
+}
+
+.pleaseWaitText {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+  font-style: italic;
+}
+
+.hidden {
+  display: none;
+}
+
+.section__recipe-main {
+  width: 100%;
+}
+
+.recipe-main__ingredient {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  border-bottom: 1px solid #cbcbcb;
+  width: 100%;
+  padding: 10px 30px 10px 10px;
+}
+
+.recipe-main__ingredient:hover {
+  background: #e6e6e6;
+}
+
+.recipe-main__quantityField {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin-left: -20px;
+  height: 40px;
+  width: 40px;
+  padding: 0;
+  text-align: center;
+  font-family: "Cuprum", sans-serif;
   font-size: 1.2rem;
+  color: #469846;
+}
+
+.recipe-main__articleDetail {
+  width: 60%;
+}
+
+.recipe-main__articleDetail-title {
+  font-size: 0.7rem;
+}
+
+.recipe-main__articleDetail-brand,.recipe-main__articleDetail-weigth,.recipe-main__articleDetail-title {
+  font-size: 0.7rem;
+  color: #151515;
+}
+
+.recipe-main__articleDetail-title {
+  font-weight: 700;
+}
+
+.recipe-main__articleDetail-brand {
+  color: #a4a4a4;
+}
+
+.recipe-main__value {
+  font-family: "Cuprum", sans-serif;
+  color: #469846;
+  font-size: 1.2rem;
+}
+
+.section__recipe-footer {
+  padding: 30px;
+  width: 100%;
+}
+
+.recipe-footer__items {
+  margin-bottom: 30px;
+  color: #a4a4a4;
+  font-size: 0.6rem;
+}
+
+.recipe-footer__value,.recipe-footer__valueFinal {
+  font-family: "Cuprum", sans-serif;
+  font-size: 1.2rem;
+  color: #151515;
+}
+
+.recipe-footer__text {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin: 15px 0;
+  color: #a4a4a4;
+}
+
+.text-total {
+  font-weight: 700;
+}
+
+.recipe-footer__valueFinal {
+  font-family: "Cuprum", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #469846;
+}
+
+.recipe-footer__button-send {
+  height: 40px;
+  width: 100%;
+  border-radius: 3px;
+  background: #469846;
+  -webkit-box-shadow: 1px 1px 2px 0 #cbcbcb;
+  box-shadow: 1px 1px 2px 0 #cbcbcb;
+  font-family: sans-serif;
+  font-size: 1.2rem;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.recipe-footer__button-totalValue {
+  font-family: "Cuprum", sans-serif;
+  font-size: 1.3rem;
+}
+
+.hidden {
+  display: none;
 }
 
 /*# sourceMappingURL=main.css.map */

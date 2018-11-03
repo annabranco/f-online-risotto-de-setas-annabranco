@@ -1,0 +1,59 @@
+.section__recipe-header {
+  border-bottom : 1px solid $blue;
+  width         : 100%;
+  padding       : 50px 40px 5px;
+}
+
+.recipe-header__subtitle {
+  text-transform : uppercase;
+  font-size      : $small;
+  color          : $darkgray;
+}
+
+.recipe-header__title {
+  margin      : 3px 0 20px;
+  font-family : 'Arial', serif;
+  font-size   : $huge;
+  font-weight : 700;
+  color       : $black;
+}
+
+.recipe-header__select {
+  display   : inline;
+  font-size : $small;
+  color     : $blue;
+  cursor    : pointer;
+}
+
+.recipe-header__verticalBar {
+  margin : 0 10px;
+}
+
+.thankU {
+  position   : absolute;
+  top        : 30%;
+  left       : 50%;
+  transform  : translate(-50%, 0);
+  font-size  : 1.5rem;
+  text-align : center;
+}
+
+.pleaseWait {
+  position  : absolute;
+  top       : 20%;
+  left      : 50%;
+  transform : translate(-50%, 0);
+  width     : 15%;
+}
+
+.pleaseWaitText {
+  position   : absolute;
+  top        : 40%;
+  left       : 50%;
+  transform  : translate(-50%, 0);
+  font-style : italic;
+}
+
+.hidden {
+  display : none;
+}
