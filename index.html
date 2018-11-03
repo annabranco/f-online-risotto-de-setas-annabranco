@@ -25,43 +25,44 @@
 
 		<main class="main__wrapper">
 			<section class="section__recipe-header">
-          <p class="recipe-header__subtitle">Ingredientes</p>
-          <h1 class="recipe-header__title">Nombre del plato</h1>
-          <p class="recipe-header__select">Seleccionar todo</p>
-          <span class="recipe-header__verticalBar">|</span>
-          <p class="recipe-header-select">Deselecionar todo</p>
+          <p class="recipe-header__subtitle" id="subtitle">Ingredientes</p>
+          <h1 class="recipe-header__title" id="title">Nombre del plato</h1>
+          <p class="recipe-header__select" id="selectAll">Seleccionar todo</p>
+          <span class="recipe-header__select recipe-header__verticalBar">|</span>
+          <p class="recipe-header__select" id="deselectAll">Deselecionar todo</p>
       </section>
-      <section class="section__recipe-main">
-          <div class="recipe-main__ingredient">
-            <input type="number" class="recipe-main__quantityField" value=1 />
+      <section class="section__recipe-main" id="ingredientsList">
+          <div class="recipe-main__ingredient" id="ingredient-1">
+            <input type="checkbox" class="recipe-main__checkbox" checked=true />
+            <input type="number" class="recipe-main__quantityField" value=1 min=0 />
             <div class="recipe-main__articleDetail">
               <p class="recipe-main__articleDetail-title">Artículo</p>
               <p class="recipe-main__articleDetail-brand">Marca</p>
               <p class="recipe-main__articleDetail-weigth">X kg.</p>
             </div>
-            <div class="recipe-main__quantityField">X,XX €</div>
+            <div class="recipe-main__value">X,XX€</div>
           </div>
       </section>
       <section class="section__recipe-footer">
           <p class="recipe-footer__items">
             Items:
-            <span class="recipe-footer__value">1</span>
+            <span class="recipe-footer__value" id="quantity">1</span>
           </p>
           <p class="recipe-footer__text">
               Subtotal
-              <span class="recipe-footer__value">2,95€</span>
+              <span class="recipe-footer__value" id="subtotal">2,95€</span>
           </p>
           <p class="recipe-footer__text">
               Gastos de envío
-              <span class="recipe-footer__value">7,00€</span>
+              <span class="recipe-footer__value" id="shipping">7,00€</span>
           </p>
           <p class="recipe-footer__text text-total">
               Total
-              <span class="recipe-footer__value">9,95€</span>
+              <span class="recipe-footer__valueFinal" id="total">9,95€</span>
           </p>
           <button class="recipe-footer__button-send">
             Comprar ingredientes:
-            <span class="recipe-footer__button-totalValue">9,95€</span>
+            <span class="recipe-footer__button-totalValue" id="totalButton">9,95€</span>
           </button>
 			</section>
 		</main>
