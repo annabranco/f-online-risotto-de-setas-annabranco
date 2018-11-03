@@ -17,10 +17,10 @@ let RECIPE;
   let   subtotal       = 0;
   let   total          = 0;
 
-  allPriceFields.forEach( priceField => total += Number( priceField.innerHTML.slice( 0, priceField.innerHTML.length - 1 ) ));
-  document.getElementById( 'subtotal' ).innerHTML = total.toFixed( 2 ) + RECIPE.currency;
-  document.getElementById( 'total' ).innerHTML = ( total + shippingCost ).toFixed( 2 ) + RECIPE.currency;
-  document.getElementById( 'totalButton' ).innerHTML = ( total + shippingCost ).toFixed( 2 ) + RECIPE.currency;
+  allPriceFields.forEach( priceField => total += Number( priceField.innerHTML.slice( 0, priceField.innerHTML.length - 1 ).replace( ',', '.' ) ));
+  document.getElementById( 'subtotal' ).innerHTML = total.toFixed( 2 ).replace( '.', ',' ) + RECIPE.currency;
+  document.getElementById( 'total' ).innerHTML = ( total + shippingCost ).toFixed( 2 ).replace( '.', ',' ) + RECIPE.currency;
+  document.getElementById( 'totalButton' ).innerHTML = ( total + shippingCost ).toFixed( 2 ).replace( '.', ',' ) + RECIPE.currency;
 };
 
 /* [ 9 ] */ const updateTotalQuantities = () => {
@@ -37,7 +37,7 @@ let RECIPE;
 
     if ( _ingredient.id === ingredientId ) {
       costPerUnity = _ingredient.price;
-      return ( costPerUnity * quantity ).toFixed( 2 ) + RECIPE.currency;
+      return ( costPerUnity * quantity ).toFixed( 2 ).replace( '.', ',' ) + RECIPE.currency;
     }
   }
 };
@@ -61,7 +61,7 @@ let RECIPE;
 
   const thankYouText = document.createElement( 'p' );
   thankYouText.classList.add( 'thankU', 'hidden' );
-  thankYouText.innerHTML = `El total de ${ total } ha sido debitado de tu tarjeta. 
+  thankYouText.innerHTML = `El total de ${ total } ha sido debitado de tu tarjeta.
   Gracias por tu compra.`;
   document.querySelector( '.header' ).append( thankYouText, pleaseWait, pleaseWaitText );
 
@@ -147,7 +147,7 @@ let RECIPE;
   INGREDIENTS__LIST.querySelector( '.recipe-main__articleDetail-brand' ).innerHTML = RECIPE.ingredients[ 0 ].brand;
   INGREDIENTS__LIST.querySelector( '.recipe-main__articleDetail-weigth' ).innerHTML = RECIPE.ingredients[ 0 ].quantity;
   INGREDIENTS__LIST.querySelector( '.recipe-main__quantityField' ).value = RECIPE.ingredients[ 0 ].items;
-  INGREDIENTS__LIST.querySelector( '.recipe-main__value' ).innerHTML = Number( RECIPE.ingredients[ 0 ].price ).toFixed( 2 ) + RECIPE.currency;
+  INGREDIENTS__LIST.querySelector( '.recipe-main__value' ).innerHTML = Number( RECIPE.ingredients[ 0 ].price ).toFixed( 2 ).replace( '.', ',' ) + RECIPE.currency;
 
   RECIPE.ingredients.forEach(( ingredient, index ) => {
     ingredient.id = `ingredient-${ index + 1 }`;
@@ -161,7 +161,7 @@ let RECIPE;
       newItem.querySelector( '.recipe-main__articleDetail-brand' ).innerHTML = ingredient.brand || '';
       newItem.querySelector( '.recipe-main__articleDetail-weigth' ).innerHTML = ingredient.quantity;
       newItem.querySelector( '.recipe-main__quantityField' ).value = ingredient.items;
-      newItem.querySelector( '.recipe-main__value' ).innerHTML = Number( ingredient.price ).toFixed( 2 ) + RECIPE.currency;
+      newItem.querySelector( '.recipe-main__value' ).innerHTML = Number( ingredient.price ).toFixed( 2 ).replace( '.', ',' ) + RECIPE.currency;
     }
   });
   console.log( RECIPE );
@@ -170,7 +170,7 @@ let RECIPE;
 
 /* [ 2 ] */ const catchRecipeNameAndDetails = () => {
   document.getElementById( 'title' ).innerHTML = RECIPE.name;
-  document.getElementById( 'shipping' ).innerHTML = RECIPE[ 'shipping-cost' ].toFixed( 2 ) + RECIPE.currency;
+  document.getElementById( 'shipping' ).innerHTML = RECIPE[ 'shipping-cost' ].toFixed( 2 ).replace( '.', ',' ) + RECIPE.currency;
 };
 
 /* [ 1 ] */ const catchData = () => {
