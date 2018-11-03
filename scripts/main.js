@@ -61,13 +61,19 @@ let RECIPE;
 
 /* [ 5 ] */ const handleQuantityInputChange = changeEvent => {
   const thisIngredient = changeEvent.currentTarget.parentElement;
+  const thisCheckBox   = thisIngredient.querySelector( '.recipe-main__checkbox' );
   const quantity       = changeEvent.currentTarget.value;
 
   thisIngredient.querySelector( '.recipe-main__value' ).innerHTML = determineCosts( thisIngredient.id, quantity );
 
-  if ( thisIngredient.querySelector( '.recipe-main__checkbox' ).checked === false ) {
-    thisIngredient.querySelector( '.recipe-main__checkbox' ).checked = true;
+  console.log( quantity, thisCheckBox);
+
+  if ( thisCheckBox.checked === false ) {
+    thisCheckBox.checked = true;
+  } else if ( Number( quantity ) === 0 ) {
+    thisCheckBox.checked = false;
   }
+
   updateTotalQuantities(); // ver [ 8 ]
   updateTotalCosts();      // ver [ 9 ]
 };
