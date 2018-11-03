@@ -69,7 +69,7 @@ let RECIPE;
     pleaseWait.classList.add( 'hidden' );
     pleaseWaitText.classList.add( 'hidden' );
     thankYouText.classList.remove( 'hidden' );
-  }, 3000 );
+  }, 4000 );
 
 };
 

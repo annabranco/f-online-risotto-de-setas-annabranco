@@ -12,7 +12,7 @@
 .recipe-footer__value,
 .recipe-footer__valueFinal {
   font-family : $important;
-  font-size   : 1rem;
+  font-size   : 1.2rem;
   color       : $black;
 }
 
@@ -41,12 +41,13 @@ font-weight : 700;
   border-radius : 3px;
   background    : $green;
   box-shadow    : 1px 1px 2px 0 $gray;
-  font-family   : $important;
+  font-family   : $main;
   font-size     : $big;
   color         : $white;
   cursor        : pointer;
 }
 
 .recipe-footer__button-totalValue {
-  
+  font-family : $important;
+  font-size   : 1.3rem;
 }
