@@ -1,15 +1,23 @@
 // Color Palette
 
 $black     : #151515;
-$gray      : #545454;
-$lightgray : #d3d3d3;
-$blue      : #4242b8;
-$green     : #256b25;
-$white     : #eeeded;
+$darkgray  : #a4a4a4;
+$gray      : #cbcbcb;
+$lightgray : #e6e6e6;
+$blue      : #4f7ec5;
+$green     : #469846;
+$white     : #ffffff;
 
 // Font sizes
 
-$main  : 16px;
+$main  : 12px;
 $huge  : 2rem;
-$big   : 1.5rem;
-$small : 0.8rem;
+$big   : 1.2rem;
+$small : 0.7rem;
+$tiny  : 0.6rem;
+
+// Font Families
+
+$title     : 'Arial',  serif;
+$important : 'Futura', sans-serif;
+$main      : sans-serif;
