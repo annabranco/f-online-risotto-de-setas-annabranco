@@ -28,3 +28,32 @@
 .recipe-header__verticalBar {
   margin : 0 10px;
 }
+
+.thankU {
+  position   : absolute;
+  top        : 30%;
+  left       : 50%;
+  transform  : translate(-50%, 0);
+  font-size  : 1.5rem;
+  text-align : center;
+}
+
+.pleaseWait {
+  position  : absolute;
+  top       : 20%;
+  left      : 50%;
+  transform : translate(-50%, 0);
+  width     : 15%;
+}
+
+.pleaseWaitText {
+  position   : absolute;
+  top        : 40%;
+  left       : 50%;
+  transform  : translate(-50%, 0);
+  font-style : italic;
+}
+
+.hidden {
+  display : none;
+}

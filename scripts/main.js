@@ -46,6 +46,33 @@ let RECIPE;
 
 // ======== Deficición de las funcionalidades directas (eventos) ===============
 
+/* [ 11 ] */ const buyIt  = () => {
+  // Esa función simula el proceso de compra
+  const total = document.getElementById( 'total' ).innerHTML;
+  document.querySelector( '.main__wrapper' ).remove();
+
+  const pleaseWait = document.createElement( 'img' );
+  pleaseWait.setAttribute( 'src', 'images/loading.gif' );
+  pleaseWait.classList.add( 'pleaseWait' );
+
+  const pleaseWaitText = document.createElement( 'p' );
+  pleaseWaitText.innerHTML = 'Procesando tu compra...';
+  pleaseWaitText.classList.add( 'pleaseWaitText' );
+
+  const thankYouText = document.createElement( 'p' );
+  thankYouText.classList.add( 'thankU', 'hidden' );
+  thankYouText.innerHTML = `El total de ${ total } ha sido debitado de tu tarjeta. 
+  Gracias por tu compra.`;
+  document.querySelector( '.header' ).append( thankYouText, pleaseWait, pleaseWaitText );
+
+  setTimeout(() => {
+    pleaseWait.classList.add( 'hidden' );
+    pleaseWaitText.classList.add( 'hidden' );
+    thankYouText.classList.remove( 'hidden' );
+  }, 3000 );
+
+};
+
 /* [ 7 ] */ const handleToggleAll  = action => {
   const CHECKBOXES = document.querySelectorAll( '.recipe-main__checkbox' );
   let isNotChecked;
@@ -95,6 +122,7 @@ let RECIPE;
   const QUANTITY_INPUTS = document.querySelectorAll( '.recipe-main__quantityField' );
   const SELECT_ALL = document.getElementById( 'selectAll' );
   const DESELECT_ALL = document.getElementById( 'deselectAll' );
+  const BUTTON_BUY = document.getElementById( 'buyIt' );
 
   CHECKBOXES.forEach( checkbox => {
     checkbox.addEventListener( 'click', handleCheckboxClick ); // ver [ 6 ]
@@ -105,6 +133,7 @@ let RECIPE;
   });
   SELECT_ALL.addEventListener( 'click', () => handleToggleAll( 'select' ));     // ver [ 7 ]
   DESELECT_ALL.addEventListener( 'click', () => handleToggleAll( 'deselect' )); // ver [ 7 ]
+  BUTTON_BUY.addEventListener( 'click', buyIt ); // ver [ 11 ]
 };
 
 // -----------------------------------------------------------------------------
