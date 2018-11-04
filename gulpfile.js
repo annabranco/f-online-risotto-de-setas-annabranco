@@ -76,7 +76,7 @@ gulp.task('scripts', function(done) {
 });
 
 // > Arranca el servidor web con BrowserSync
-gulp.task('default', gulp.series(['styles', 'scripts'], function(done) {
+gulp.task('default', gulp.series(['styles-min', 'scripts'], function(done) {
   browserSync.init({
     server : {
       baseDir: './'
