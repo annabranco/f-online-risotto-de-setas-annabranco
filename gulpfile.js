@@ -55,13 +55,12 @@ gulp.task('styles-min', function(done) {
       cascade: false
     }))
     .pipe(gulp.dest(config.scss.dest))
-    // .pipe(notify({message: 'CSS MIN OK', onLast: true}));
   done();
 });
 
 // > Procesa los archivos TypeScript (TS), minimizados
 gulp.task('scripts', function(done) {
-   tsProject.src()
+  tsProject.src()
     .pipe(plumber({errorHandler: function(err) {
       notify.onError({
           title: "Gulp error in " + err.plugin,
@@ -88,12 +87,6 @@ gulp.task('default', gulp.series(['styles-min', 'scripts'], function(done) {
   gulp.watch(config.scss.src, gulp.series('styles'));
   gulp.watch('scripts/**/*.ts', gulp.series(['scripts', 'bs-reload']));
   gulp.watch(config.html, gulp.series('bs-reload'));
-  done();
-}));
-
-// > Genera una versión lista para producción
-gulp.task('deploy', gulp.series(['styles-min'], function(done) {
-  console.log('> Versión de producción: OK');
   done();
 }));
 
