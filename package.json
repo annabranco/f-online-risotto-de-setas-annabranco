@@ -7,7 +7,6 @@
 		"gulp-autoprefixer": "*",
 		"gulp-clean-css": "*",
 		"gulp-combine-mq": "*",
-		"gulp-concat": "*",
 		"gulp-notify": "*",
 		"gulp-plumber": "*",
 		"gulp-rename": "*",
@@ -18,15 +17,12 @@
 		"gulp-zip": "*",
 		"run-sequence": "*"
 	},
-	"devDependencies": {},
+	"devDependencies": {
+		"gulp-typescript": "^5.0.0-alpha.3",
+		"ts-loader": "^5.3.0",
+		"typescript": "^3.1.6"
+	},
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+ssh://git@github.com:Adalab/Adalab-web-starter-kit.git"
-	},
-	"author": "Adalab",
-	"license": "MIT",
-	"homepage": "https://github.com/Adalab/Adalab-web-starter-kit"
+	}
 }

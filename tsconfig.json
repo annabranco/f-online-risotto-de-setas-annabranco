@@ -1,0 +1,19 @@
+{
+  "compileOnSave"   : true,
+  "compilerOptions" : {
+        "module"             : "system",
+        "noImplicitAny"      : true,
+        "removeComments"     : true,
+        "preserveConstEnums" : true,
+        "outFile"            : "main.js",
+        "sourceMap"          : true,
+        "target"             : "es5"
+    },
+    "include": [
+        "scripts/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "**/*.spec.ts"
+    ]
+}

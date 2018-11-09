@@ -1,8 +1,21 @@
 'use strict';
 
-const EXERCISE_URL = 'https://raw.githubusercontent.com/Adalab/recipes-data/master/rissoto-setas.json';
-let RECIPE;
+const EXERCISE_URL: string = 'https://raw.githubusercontent.com/Adalab/recipes-data/master/rissoto-setas.json';
+let RECIPE: Recipe;
 
+interface Recipe {
+  name: string,
+  "shipping-cost" : number,
+  "currency"      : string,
+  "ingredients"   : {
+    "product"  : string,
+    "brand"    : string,
+    "items"    : string,
+    "quantity" : string,
+    "price"    : number,
+    id?        : string
+  }[]
+};
 /**
  * Como uso arrow functions, para entender la lógica de ese código recomiendo
  * que sea leído de bajo para arriba.
@@ -13,9 +26,8 @@ let RECIPE;
 
 /* [ 10 ] */ const updateTotalCosts = () => {
   const allPriceFields = document.querySelectorAll( '.recipe-main__value' );
-  const shippingCost = RECIPE[ 'shipping-cost' ];
-  let   subtotal       = 0;
-  let   total          = 0;
+  const shippingCost: number = RECIPE[ 'shipping-cost' ];
+  let   total       : number = 0;
 
   allPriceFields.forEach( priceField => total += Number( priceField.innerHTML.slice( 0, priceField.innerHTML.length - 1 ).replace( ',', '.' ) ));
   document.getElementById( 'subtotal' ).innerHTML = total.toFixed( 2 ).replace( '.', ',' ) + RECIPE.currency;
@@ -25,15 +37,15 @@ let RECIPE;
 
 /* [ 9 ] */ const updateTotalQuantities = () => {
   const allQuantityFields = document.querySelectorAll( '.recipe-main__quantityField' );
-  let   total             = 0;
+  let total: number = 0;
 
-  allQuantityFields.forEach( quantityField => total += Number( quantityField.value ));
-  document.getElementById( 'quantity' ).innerHTML = total;
+  allQuantityFields.forEach( (quantityField: HTMLInputElement) => total += Number( quantityField.value ));
+  document.getElementById( 'quantity' ).innerHTML = total.toString();
 };
 
-/* [ 8 ] */ const determineCosts = ( ingredientId, quantity ) => {
+/* [ 8 ] */ const determineCosts = ( ingredientId: string, quantity: number ): string => {
   for ( const _ingredient of RECIPE.ingredients ) {
-    let costPerUnity;
+    let costPerUnity: number;
 
     if ( _ingredient.id === ingredientId ) {
       costPerUnity = _ingredient.price;
@@ -48,18 +60,18 @@ let RECIPE;
 
 /* [ 11 ] */ const buyIt  = () => {
   // Esa función simula el proceso de compra
-  const total = document.getElementById( 'total' ).innerHTML;
+  const total: string = document.getElementById( 'total' ).innerHTML;
   document.querySelector( '.main__wrapper' ).remove();
 
-  const pleaseWait = document.createElement( 'img' );
+  const pleaseWait: HTMLImageElement = document.createElement( 'img' );
   pleaseWait.setAttribute( 'src', 'images/loading.gif' );
   pleaseWait.classList.add( 'pleaseWait' );
 
-  const pleaseWaitText = document.createElement( 'p' );
+  const pleaseWaitText: HTMLParagraphElement = document.createElement( 'p' );
   pleaseWaitText.innerHTML = 'Procesando tu compra...';
   pleaseWaitText.classList.add( 'pleaseWaitText' );
 
-  const thankYouText = document.createElement( 'p' );
+  const thankYouText: HTMLParagraphElement = document.createElement( 'p' );
   thankYouText.classList.add( 'thankU', 'hidden' );
   thankYouText.innerHTML = `El total de ${ total } ha sido debitado de tu tarjeta.
   Gracias por tu compra.`;
@@ -73,33 +85,33 @@ let RECIPE;
 
 };
 
-/* [ 7 ] */ const handleToggleAll  = action => {
+/* [ 7 ] */ const handleToggleAll  = (action: string) => {
   const CHECKBOXES = document.querySelectorAll( '.recipe-main__checkbox' );
-  let isNotChecked;
+  let isNotChecked: boolean;
 
   action === 'deselect' ? isNotChecked = true : isNotChecked = false;
 
-  CHECKBOXES.forEach( checkbox => checkbox.checked === isNotChecked && checkbox.click() );
+  CHECKBOXES.forEach( (checkbox: HTMLInputElement) => checkbox.checked === isNotChecked && checkbox.click() );
 };
 
-/* [ 6 ] */ const handleCheckboxClick = clickEvent => {
-  const thisIngredient = clickEvent.currentTarget.parentElement;
+/* [ 6 ] */ const handleCheckboxClick = (clickEvent: Event) => {
+  const thisIngredient: HTMLElement = (clickEvent.currentTarget as HTMLInputElement).parentElement;
 
-  if ( clickEvent.currentTarget.checked ) {
-    thisIngredient.querySelector( '.recipe-main__quantityField' ).value = 1;
+  if ( (clickEvent.currentTarget as HTMLInputElement).checked ) {
+    (thisIngredient.querySelector( '.recipe-main__quantityField' ) as HTMLInputElement).value = '1';
     thisIngredient.querySelector( '.recipe-main__value' ).innerHTML = determineCosts( thisIngredient.id, 1 ); // ver [ 8 ]
   } else {
-    thisIngredient.querySelector( '.recipe-main__quantityField' ).value = 0;
+    (thisIngredient.querySelector( '.recipe-main__quantityField' ) as HTMLInputElement).value = '0';
     thisIngredient.querySelector( '.recipe-main__value' ).innerHTML = determineCosts( thisIngredient.id, 0 ); // ver [ 8 ]
   }
   updateTotalQuantities(); // ver [ 9 ]
   updateTotalCosts();      // ver [ 10 ]
 };
 
-/* [ 5 ] */ const handleQuantityInputChange = changeEvent => {
-  const thisIngredient = changeEvent.currentTarget.parentElement;
-  const thisCheckBox   = thisIngredient.querySelector( '.recipe-main__checkbox' );
-  const quantity       = changeEvent.currentTarget.value;
+/* [ 5 ] */ const handleQuantityInputChange = (changeEvent: Event) => {
+  const thisIngredient: HTMLElement      = (changeEvent.currentTarget as HTMLInputElement).parentElement;
+  const thisCheckBox  : HTMLInputElement = thisIngredient.querySelector( '.recipe-main__checkbox' );
+  const quantity      : number           = parseFloat((changeEvent.currentTarget as HTMLInputElement).value);
 
   thisIngredient.querySelector( '.recipe-main__value' ).innerHTML = determineCosts( thisIngredient.id, quantity ); // ver [ 8 ]
 
@@ -120,9 +132,9 @@ let RECIPE;
 /* [ 4 ] */ const addEventListeners = () => {
   const CHECKBOXES      = document.querySelectorAll( '.recipe-main__checkbox' );
   const QUANTITY_INPUTS = document.querySelectorAll( '.recipe-main__quantityField' );
-  const SELECT_ALL = document.getElementById( 'selectAll' );
-  const DESELECT_ALL = document.getElementById( 'deselectAll' );
-  const BUTTON_BUY = document.getElementById( 'buyIt' );
+  const SELECT_ALL      = document.getElementById( 'selectAll' );
+  const DESELECT_ALL    = document.getElementById( 'deselectAll' );
+  const BUTTON_BUY      = document.getElementById( 'buyIt' );
 
   CHECKBOXES.forEach( checkbox => {
     checkbox.addEventListener( 'click', handleCheckboxClick ); // ver [ 6 ]
@@ -141,27 +153,27 @@ let RECIPE;
 // ====== Funciones estructurales, montan la estructura básica de la página ====
 
 /* [ 3 ] */ const catchIngredients = () => {
-  const INGREDIENTS__LIST = document.getElementById( 'ingredientsList' );
+  const INGREDIENTS__LIST: HTMLElement = document.getElementById( 'ingredientsList' );
 
   INGREDIENTS__LIST.querySelector( '.recipe-main__articleDetail-title' ).innerHTML = RECIPE.ingredients[ 0 ].product;
   INGREDIENTS__LIST.querySelector( '.recipe-main__articleDetail-brand' ).innerHTML = RECIPE.ingredients[ 0 ].brand;
   INGREDIENTS__LIST.querySelector( '.recipe-main__articleDetail-weigth' ).innerHTML = RECIPE.ingredients[ 0 ].quantity;
-  INGREDIENTS__LIST.querySelector( '.recipe-main__quantityField' ).value = RECIPE.ingredients[ 0 ].items;
+  (INGREDIENTS__LIST.querySelector( '.recipe-main__quantityField' ) as HTMLInputElement).value = RECIPE.ingredients[ 0 ].items;
   INGREDIENTS__LIST.querySelector( '.recipe-main__value' ).innerHTML = Number( RECIPE.ingredients[ 0 ].price ).toFixed( 2 ).replace( '.', ',' ) + RECIPE.currency;
 
   RECIPE.ingredients.forEach(( ingredient, index ) => {
     ingredient.id = `ingredient-${ index + 1 }`;
 
     if ( index > 0 ) {
-      const newItem = document.querySelector( '.recipe-main__ingredient' ).cloneNode( true );
+      const newItem: Node = document.querySelector( '.recipe-main__ingredient' ).cloneNode( true );
 
       INGREDIENTS__LIST.appendChild( newItem );
-      newItem.id = `ingredient-${ index + 1 }`;
-      newItem.querySelector( '.recipe-main__articleDetail-title' ).innerHTML = ingredient.product;
-      newItem.querySelector( '.recipe-main__articleDetail-brand' ).innerHTML = ingredient.brand || '';
-      newItem.querySelector( '.recipe-main__articleDetail-weigth' ).innerHTML = ingredient.quantity;
-      newItem.querySelector( '.recipe-main__quantityField' ).value = ingredient.items;
-      newItem.querySelector( '.recipe-main__value' ).innerHTML = Number( ingredient.price ).toFixed( 2 ).replace( '.', ',' ) + RECIPE.currency;
+      (newItem as HTMLElement).id = `ingredient-${ index + 1 }`;
+      (newItem as HTMLElement).querySelector( '.recipe-main__articleDetail-title' ).innerHTML = ingredient.product;
+      (newItem as HTMLElement).querySelector( '.recipe-main__articleDetail-brand' ).innerHTML = ingredient.brand || '';
+      (newItem as HTMLElement).querySelector( '.recipe-main__articleDetail-weigth' ).innerHTML = ingredient.quantity;
+      ((newItem as HTMLElement).querySelector( '.recipe-main__quantityField' ) as HTMLInputElement).value = ingredient.items.toString();
+      (newItem as HTMLElement).querySelector( '.recipe-main__value' ).innerHTML = Number( ingredient.price ).toFixed( 2 ).replace( '.', ',' ) + RECIPE.currency;
     }
   });
   console.log( RECIPE );
@@ -207,5 +219,3 @@ let RECIPE;
 // -----------------------------------------------------------------------------
 
 INITIATE(); // ver [ 0 ]
-
-//# sourceMappingURL=main.min.js.map
