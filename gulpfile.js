@@ -1,3 +1,4 @@
+/* eslint-disable */
 'use strict';
 
 var autoprefixer = require('gulp-autoprefixer');
@@ -68,7 +69,7 @@ gulp.task('scripts', function(done) {
       })(err);
     }}))
     .pipe(tsProject()).js
-    .pipe(uglify())
+    // .pipe(uglify()) // minimiza el código final para tornarlo más compacto y rápido.
     .pipe(gulp.dest('scripts'))
     .pipe(browserSync.reload({ stream:true }))
   done();

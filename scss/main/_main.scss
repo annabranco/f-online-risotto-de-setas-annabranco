@@ -1,9 +1,12 @@
+html {
+  font-family : $main;
+  font-size   : $normal;
+}
+
 body {
   height           : 100%;
   width            : 100%;
   background-image : linear-gradient(137deg, $lightgray, rgba($green, 0.4));
-  font-family      : $main;
-  font-size        : $normal;
 }
 
 section {
@@ -11,12 +14,8 @@ section {
 }
 
 .main__wrapper {
-  display         : flex;
-  flex-direction  : column;
-  align-items     : center;
-  justify-content : center;
-  margin          : 20px auto;
-  border          : 1px solid $gray;
-  width           : 50vw;
-  background      : $white;
+  margin     : 20px auto;
+  border     : 1px solid $gray;
+  width      : 50vw;
+  background : $white;
 }
