@@ -1,3 +1,5 @@
+_Versión final refactorizada con TypeScript._
+
 # Prueba técnica #5
 
 ## Resumen
